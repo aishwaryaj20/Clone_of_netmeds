@@ -12,8 +12,7 @@
 
     <link rel="shortcut icon" href="http://example.com/favicon.ico" />
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="completedOrder.css">
+    <link rel="stylesheet" href="index.css">
     <title>Document</title>
 </head>
 
@@ -23,20 +22,58 @@
 
     <div id="longbox">
 
+        <div class="imgbox">
+            <img src="https://www.netmeds.com/assets/gloryweb/images/home-logo-netmeds-new.svg">
 
-        <a href="newpage.html">
-            <img id="log" src="E:\jsprogram\week1\week_2\array\ojproblem\unit2async\DSA\HTML\JS\projectNetmeds\images\icons8-logout-58.png">
-        </a>
-    </div>
-
-
-
-    <div class="card">
-        <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
-            <i class="checkmark">✓</i>
         </div>
-        <h1>Success</h1>
-        <p>We received your purchase request;<br/> we'll be in touch shortly!</p>
+
+
+    </div>
+    <div id="imagecontainer">
+
+        <img class="ban" src="https://www.netmeds.com/images/cms/wysiwyg/cms/1588773798_sign-in-banner-new.png" alt="sign-in banner">
+
+        <div class="signupbox">
+            <form onsubmit="signup(event)" id="myForm" action="">
+
+                <h2 class="tit">Create Account</h2>
+
+
+
+                <label class="num">Email Id</label>
+                <br>
+                <input class="email" id="email" placeholder="Enter your Email Id" type="email">
+
+                <br>
+                <br>
+                <label class="num">First Name</label>
+                <br>
+                <input class="name" id="name" placeholder="Enter your Name" type="text">
+
+                <br>
+                <br> <label class="num">Phone Number</label>
+                <br>
+                <span _ngcontent-wxl-c6="" class="prefix">+91</span>
+                <input class="numtext" id="mobile" type="number">
+                <p class="error" id="error"></p>
+
+                <br>
+                <br>
+                <button class="otp" id="otp" type="submit">VERIFY</button>
+
+                <div>
+
+                    <br>
+                    <br>
+                    <a href="singupnetmeds copy.html">
+                        <div class="ottp" id="op" type="submit">LOGIN</div>
+                    </a>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
     </div>
 
 
@@ -115,3 +152,50 @@
 </body>
 
 </html>
+
+<script>
+    function signup(e) {
+        e.preventDefault();
+        let myForm = document.getElementById("myForm")
+
+        let name = myForm.name.value;
+        let email = myForm.email.value;
+
+        let mobile = myForm.mobile.value
+
+        console.log("data:", name, email, mobile)
+
+        if (myForm.mobile.value <= 9 && myForm.mobile.value == '') {
+            error.textContent = "please enter a valid Phone Number";
+
+            error.setAttribute("class", "alert_color")
+
+        } else {
+            error.textContent = "Successfully Created Account";
+            error.setAttribute("class", "alert_colorgreen")
+
+        }
+        if (localStorage.getItem('netmedusers') === null) {
+
+            localStorage.setItem('netmedusers', JSON.stringify([])) //empty array
+        }
+
+        //send userdata
+
+        let netmedusers = {
+
+            name,
+            email,
+            mobile,
+
+        };
+
+        //get arr from locsa
+
+        let arr = JSON.parse(localStorage.getItem("netmedusers"));
+        //push new user to arr
+        arr.push(netmedusers)
+
+        localStorage.setItem('netmedusers', JSON.stringify(arr));
+    }
+</script>
